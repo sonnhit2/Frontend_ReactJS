@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './UserManage.scss';
 import userService from '../../services/userService';
 import ModalUser from './ModalUser';
-import { async } from 'q';
+import {emitter} from '../../utils/emitter';
 
 class UserManage extends Component {
 
@@ -50,10 +50,16 @@ class UserManage extends Component {
                alert(response.errMessage);
            }
            else{
+               //re-load user list 
                await this.getAllUsersFromReact();
+               //close popup modal create user
                this.setState({
                    isOpenModalUser:false
                });
+
+               //empty all input value in modal popup create user
+               emitter.emit('EVENT_CLEAR_MODAL_DATA'); // khong truyen data
+               //emitter.emit('EVENT_CLEAR_MODAL_DATA', {'id': 'your id'}); // co truyen data
            }
         //    console.log('response create user: ',response);
         } catch (e) {
@@ -61,6 +67,21 @@ class UserManage extends Component {
         }
         
         console.log("check data: ",data)
+    }
+
+    handleDeleteUser = async(user) =>{
+        try {
+            let response = await userService.deleteUserService(user.id);
+            if(response && response.errCode!==0){
+                alert(response.errMessage);
+            } else {
+                await this.getAllUsersFromReact();
+            }
+            console.log("response delete user: ", response);
+        } catch (e) {
+            console.log(e);
+        }
+        console.log("user: ", user);
     }
     /** Lifecycle
      *  Run component
@@ -97,14 +118,17 @@ class UserManage extends Component {
                         <tbody>
                         {arrUsers && arrUsers.map((item,index)=>{
                             return (
-                                    <tr key={item.id}>
+                                    <tr key={index}>
                                         <td>{item.email}</td>
                                         <td>{item.firstName}</td>
                                         <td>{item.lastName}</td>
                                         <td>{item.address}</td>
                                         <td>
                                             <button className='btn-edit'><i className="fas fa-pencil-alt"></i></button>
-                                            <button className='btn-delete'><i className="fas fa-trash"></i></button>
+                                            <button 
+                                                className='btn-delete'
+                                                onClick={()=>{this.handleDeleteUser(item)}}
+                                            ><i className="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                             )
