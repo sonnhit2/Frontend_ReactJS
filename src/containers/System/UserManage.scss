@@ -30,4 +30,37 @@
     width: 50px; border: none; outline: none; background: transparent; color: red;
     &:hover{background: transparent !important; color: red !important;}
 }
+
+.modal-user-container {
+    .modal-header {
+        button{
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 27px;
+        }
+    }
+    .modal-user-body {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            width: 49%;
+
+            &.max-width-input {
+                width: 100%;
+            }
+
+            input {
+                border-radius: 3px;
+                border: 1px solid gray;
+                outline: none;
+                height: 30px;
+                padding: 0 10px;
+            }
+        }    
+    }
+}
   
