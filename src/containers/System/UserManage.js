@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './UserManage.scss';
 import userService from '../../services/userService';
 import ModalUser from './ModalUser';
+import ModalEditUser from './ModalEditUser';
 import {emitter} from '../../utils/emitter';
 
 class UserManage extends Component {
@@ -12,7 +13,9 @@ class UserManage extends Component {
         super(props);
         this.state = {
             arrUsers: [],
-            isOpenModalUser: false
+            isOpenModalUser: false,
+            isOpenModalEditUser: false,
+            userEdit: {}
         }
 
     }
@@ -43,6 +46,12 @@ class UserManage extends Component {
         });
     }
 
+    toggleUserEditModal = () => {
+        this.setState({
+            isOpenModalEditUser: !this.state.isOpenModalEditUser
+        });
+    }
+ 
     createNewUser = async (data) => {
         try {
            let response = await userService.createNewUserService(data);    
@@ -83,6 +92,36 @@ class UserManage extends Component {
         }
         console.log("user: ", user);
     }
+
+    handleEditUser = (user) => {
+        console.log(user);
+        this.setState({
+            isOpenModalEditUser: true,
+            userEdit: user
+        });
+    }
+
+    doEditUser = async(user) =>{
+        try {
+            let response = await userService.editUserService(user);
+            if(response && response.errCode!==0){
+                alert(response.errMessage);
+            }
+            else {
+                //reload user list
+                await this.getAllUsersFromReact();
+                //close modal popup edit user
+                this.setState({
+                    isOpenModalEditUser: false
+                });
+                //no need empty fields input
+            }
+            console.log('Click save user', response);            
+        } catch (e) {
+            console.log(e);
+        }
+
+    }
     /** Lifecycle
      *  Run component
      * 1. Run constructor -> init state
@@ -98,6 +137,14 @@ class UserManage extends Component {
                     toggleFromParent = {this.toggleUserModal}
                     createNewUser = {this.createNewUser}
                 />
+                {this.state.isOpenModalEditUser &&
+                    <ModalEditUser 
+                        isOpen = {this.state.isOpenModalEditUser}
+                        toggleFromParent = {this.toggleUserEditModal}
+                        currentUser = {this.state.userEdit}
+                        editUser = {this.doEditUser}
+                    />
+                }
                 <div className="title text-center">Manage Users </div>
                 <div className='mx-1'>
                     <button className='btn btn-primary px-3'
@@ -124,7 +171,10 @@ class UserManage extends Component {
                                         <td>{item.lastName}</td>
                                         <td>{item.address}</td>
                                         <td>
-                                            <button className='btn-edit'><i className="fas fa-pencil-alt"></i></button>
+                                            <button 
+                                                className='btn-edit'
+                                                onClick={()=>{this.handleEditUser(item)}}
+                                            ><i className="fas fa-pencil-alt"></i></button>
                                             <button 
                                                 className='btn-delete'
                                                 onClick={()=>{this.handleDeleteUser(item)}}
