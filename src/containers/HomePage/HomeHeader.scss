@@ -1,7 +1,7 @@
 .home-header-container{
-    height: 60px;
+    height: 70px;
     width: 100%;
-    padding: 0 20px;
+    padding: 0 60px;
 
     .home-header-content {
         width: 100%;
@@ -9,15 +9,16 @@
         display: flex; //cac element ngang cap se nam tren cung 01 hang
 
         .left-content {
-            width: 25%;
+            width: 20%;
             display: flex;
             align-items: center;
-            border: 3px solid red;
 
             .header-logo{
-                background: url('../../assets/logo.svg') center center no-repeat;
+                // background: url('../../assets/logo.svg') center center no-repeat;
                 height: 100%;
                 width: 100%;
+                transform: scale(0.7,0.7);
+                margin-left: -28px;
                 cursor: pointer;
             }
 
@@ -29,11 +30,10 @@
         }
 
         .center-content {
-            width: 50%;
+            width: 55%;
             display: flex;
             justify-content:space-between;
             align-items: center;
-            border: 3px solid green;
 
             .child-content {
                 .subs-title{
@@ -46,9 +46,126 @@
         .right-content {
             width: 25%;
             display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            .support{
+                padding-right: 50px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                i{
+                    font-size: 15px;
+                    margin-right: 5px;
+                }
+            }
+
+            .language-vi{
+                cursor: pointer;
+
+                &.active{
+                    color: orange;
+                }
+            }
+            .language-en {
+                margin: 0 10px;
+                cursor: pointer;
+                &.active{
+                    color: blue;
+                }
+            }
+        }
+    }
+}
+
+.home-header-banner{
+    background: url('../../assets/header-backgroud.jpg');
+    height: 480px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+
+    .content-top {
+        background-image: linear-gradient(rgba(0,0,0,0.25),rgba(255,255,255,0.1));
+        height: 65%;
+        padding-top: 15px;
+        .title1{
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 1px 1px 1px #333;
+            color: white;
+            margin-top: 33px;
+            margin-bottom: 5px;
+        }
+        .title2{
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 1px 1px 1px #333;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .search{
+            width: fit-content;
+            display: flex;
             justify-content: center;
             align-items: center;
-            border: 3px solid orchid;
+            margin:auto ;
+            padding: 10px;
+            border-radius: 25px;
+            background: #f7d800;
+    
+            i{
+                margin: 0 5px;
+            }
+            input{
+                height: 30px;
+                width: 360px;
+                background: transparent;
+                border: none;
+                outline: none;
+            }
+        }    
+    }
+    .content-bottom{
+        height: 35%;
+        display: flex;
+        align-items: flex-end;
+        justify-content:space-evenly;
+        background-image: linear-gradient(rgba(255,255,255,0.1),rgba(255,255,255,0.9),rgba(255,255,255,1));
+
+        .options{
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+
+            .option-child{
+                width: 100px;
+                text-align: center;
+                .icon-child{
+                    background: whitesmoke;
+                    width: 60px;
+                    height: 60px;
+                    padding: 10px;
+                    border-radius: 50%;
+                    text-align: center;
+                    margin: 0 auto;
+
+                    i{
+                        font-size: 40px;
+                        color: #178ec5;
+                    }
+                }
+                .text-child{
+                    font-size: 16px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    &:hover{
+                        color: #178ec5;
+                    }
+                }
+            }
         }
     }
 }

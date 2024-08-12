@@ -1,4 +1,29 @@
 {
+    "home-header": {
+        "speciality": "Medical specialty",
+        "search-doctor": "Find a doctor by specialty",
+        "health-facilities": "Health facilities",
+        "choose-hospital-clinic":"Choose hospital clinic",
+        "doctors": "Doctor",
+        "choose-doctor": "Choose a good doctor",
+        "medical-package": "Medical package",
+        "general-health-checkup": "General health checkup",
+        "support":"Support",
+        "banner-top": {
+            "title1":"MEDICAL PLATFORM",
+            "title2":"COMPREHENSIVE HEALTH CARE"
+        },
+        "banner-bottom": {
+            "specialist-examination":"Specialist examination",
+            "remote-examination": "Remote examination",
+            "general-examination": "General examination",
+            "medical-test": "Medical test",
+            "mental-health": "Mental health",
+            "dental-checkup": "Dental checkup"
+        }
+    },
+
+
     "common": {
         "add": "Add",
         "edit": "Edit",
