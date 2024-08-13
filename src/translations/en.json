@@ -11,7 +11,8 @@
         "support":"Support",
         "banner-top": {
             "title1":"MEDICAL PLATFORM",
-            "title2":"COMPREHENSIVE HEALTH CARE"
+            "title2":"COMPREHENSIVE HEALTH CARE",
+            "searchTitle": "Find a medical specialist"
         },
         "banner-bottom": {
             "specialist-examination":"Specialist examination",
